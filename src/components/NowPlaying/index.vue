@@ -1,6 +1,6 @@
 <template>
   <div class="movie_body" ref="movie_body">
-    <loading v-if="isLoading"/>
+    <loading v-if="isLoading" />
     <Scroller v-else :handleToScroll="handleToScroll" :handleToTouchEnd="handleToTouchEnd">
       <ul>
         <li class="pullDown">{{ pullDownMsg }}</li>
@@ -37,18 +37,20 @@ export default {
       movieList: [],
       pullDownMsg: "",
       isLoading: true,
-      prevCityId : -1
+      prevCityId: -1
     };
   },
   activated() {
     var cityId = this.$store.state.city.id;
-    if( this.prevCityId === cityId ){ return; }
+    if (this.prevCityId === cityId) {
+      return;
+    }
     this.isLoading = true;
-    this.axios.get("/api/movieOnInfoList?cityId="+cityId).then(res => {
+    this.axios.get("/api/movieOnInfoList?cityId=" + cityId).then(res => {
       var msg = res.data.msg;
       if (msg === "ok") {
         this.movieList = res.data.data.movieList;
-        this.isLoading=false;
+        this.isLoading = false;
         this.prevCityId = cityId;
         // this.$nextTick(() => {
         //   var scroll = new BScroll(this.$refs.movie_body, {
@@ -82,6 +84,10 @@ export default {
     });
   },
   methods: {
+    handleToDetail(movieId) {
+      //console.log(movieId);
+      this.$router.push('/movie/detail/1/' + movieId);
+    },
     handleToScroll(pos) {
       if (pos.y > 30) {
         this.pullDownMsg = "正在更新中";
