@@ -61,7 +61,12 @@ export default {
         });
     },3000);
        
-    }
+    },
+    methods: {
+        getIp: function(){
+            
+        }
+    },
 }
 </script>
 

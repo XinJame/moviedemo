@@ -1,4 +1,6 @@
 module.exports = {
+    //静态资源
+    publicPath: '/xin',
     devServer : {
         proxy : {
             '/api2' : {
